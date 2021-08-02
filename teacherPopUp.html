@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Modal</title>
+    <link rel="stylesheet" href="teacherPopUp.css">
+</head>
+
+<body>
+    <!-- Trigger/Open The TeacherModal -->
+    <button id="myBtn">Open Teacher Modal</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalHeading">Add Teacher</p>
+            <label for="">Name</label><input type="text" class="inputs" id="inputName"><br>
+            <label for="">Surname</label><input type="text" class="inputs" id="inputSurname">
+            <button id="modalButton">Add</button>
+        </div>
+
+    </div>
+    <script src="teacherPopUp.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 30%;
+  height: 70%;
+  overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  font-family: cursive;
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 2em;
+  border: 0.2em solid rgba(29, 68, 28, 0.562);
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+#modalHeading {
+  color: green;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(69, 134, 60);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* input fields*/
+.inputs {
+  padding: 0.2em;
+  margin-top: 1em;
+}
+#inputName {
+  margin-left: 4em;
+}
+#inputSurname {
+  margin-left: 2.3em;
+}
+
+input {
+  outline: none;
+}
+
+#modalButton {
+  margin-top: 1.2em;
+  margin-left: 15.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
