@@ -1,0 +1,48 @@
+/* The Modal (background) */
+.modal {
+  font-family: cursive;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 30%;
+  height: 70%;
+  overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 2em;
+  border: 0.2em solid rgba(29, 68, 28, 0.562);
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+#modalHeading {
+  color: green;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(69, 134, 60);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*content*/
+#Info{
+  width: 18.2em;
+  padding: 1em;
+  color: rgb(255, 255, 255);
+  background-color:  rgba(82, 121, 77, 0.747);
+  border-radius: 1em;
+}
