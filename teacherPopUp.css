@@ -5,8 +5,8 @@
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
-  width: 30%;
-  height: 70%;
+  width: 35%;
+  height: 75%;
   overflow: auto; /* Enable scroll if needed */
 }
 
@@ -14,11 +14,12 @@
 .modal-content {
   font-family: cursive;
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 10% auto; /* 15% from the top and centered */
   padding: 2em;
   border: 0.2em solid rgba(29, 68, 28, 0.562);
   width: 80%; /* Could be more or less, depending on screen size */
 }
+
 #modalHeading {
   color: green;
 }
@@ -43,11 +44,14 @@
   padding: 0.2em;
   margin-top: 1em;
 }
-#inputName {
-  margin-left: 4em;
+#name {
+  margin-left: 3.9em;
 }
-#inputSurname {
-  margin-left: 2.3em;
+#surname {
+  margin-left: 2.2em;
+}
+#subject {
+  margin-left: 2.6em;
 }
 
 input {
