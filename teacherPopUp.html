@@ -19,13 +19,17 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p id="modalHeading">Add Teacher</p>
-            <label for="">Name</label><input type="text" class="inputs" id="inputName"><br>
-            <label for="">Surname</label><input type="text" class="inputs" id="inputSurname">
-            <button id="modalButton">Add</button>
+            <form id="modalForm">
+            <label for="">Name</label><input type="text" class="inputs" id="name"  ><br>
+            <label for="">Surname</label><input type="text" class="inputs" id="surname"  ><br>
+            <label for="">Subject</label><input type="text" class="inputs" id="subject"  >
+            <button type="submit" id="modalButton" onclick="addTeacher()" onsubmit="addButtonClicked()">Add</button>
+            </form>
         </div>
 
     </div>
     <script src="teacherPopUp.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
