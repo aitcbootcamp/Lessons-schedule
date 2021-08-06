@@ -7,7 +7,7 @@
     top: 0;
     width: 50%;
     height: 600px;
-    overflow: auto; /* Enable scroll if needed */
+    overflow: hidden; /* Enable scroll if needed */
   }
   
   /* Modal Content/Box */
