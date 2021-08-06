@@ -86,3 +86,19 @@ let addButtonClicked = () => {
   //close the modal after add button is clicked
   modal.style.display = "none";
 };
+
+
+/* delete object from the group array and then delete it from the teachers' array*/
+
+let removeTeacher = (getClickedElementID) => {
+  let teacher = teachers.find((teacher) => teacher.id === getClickedElementID);
+  for (let i = 0; i < groups.length; i++) {
+    if (groups[i].teacherID === teacher.ID) {
+      groups[i].teacherID = null;
+    } else {
+      continue;
+    }
+  }
+  teachers.splice(teachers.indexOf(teacher), 1);
+};
+
