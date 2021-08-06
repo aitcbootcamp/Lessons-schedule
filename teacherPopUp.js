@@ -50,10 +50,10 @@ class Teacher {
   }
 }
 
-//adding teacher to the array when manager clicks the button
+/*adding teacher to the array when manager clicks the button*/
+
 let addTeacher = () => {
   //get values from inputs
-
   let nameInputValue = document.getElementById("name").value;
   let surnameInputValue = document.getElementById("surname").value;
   let fullName = nameInputValue + " " + surnameInputValue;
@@ -62,43 +62,42 @@ let addTeacher = () => {
 
   //create teacher object
   let newTeacher = new Teacher(fullName, id, subjectInputValue);
+
   // pusshing new teacher object to the teachers's array
   teachers.push(newTeacher);
-  console.log(teachers[1]);
+
+  /*removing teachers*/
+  //   let removeTeacher = (getClickedElementID) => {
+  //     let teacher = teachers.find(
+  //       (teacher) => teacher.id === getClickedElementID
+  //     );
+  //     for (let i = 0; i < groups.length; i++) {
+  //       if (groups[i].newTeacherID === newTeacher.ID) {
+  //         groups[i].newTeacherID = null;
+  //       } else {
+  //         continue;
+  //       }
+  //     }
+  //   };
+  //   teachers.splice(teachers.indexOf(newTeacher), 1);
+  //   removeTeacher();
 };
 
 /* when clicking on the add button */
 
-let addButtonClicked = () => {
-  //prevent page from refreshing
-  let preventRefreshing = (event) => {
-    event.preventDefault();
-    window.history.back();
-  };
-  //getting the form
-  let form = document.getElementById("modalForm");
-  //attach event listener to the form
-  form.addEventListener("submit", preventRefreshing, true);
-  //clear input values after submitting
-  nameInputValue = " ";
-  surnameInputValue = " ";
-  subjectInputValue = " ";
+let preventRefreshing = (event) => {
+  event.preventDefault();
+};
+
+//getting the form
+let form = document.getElementById("modalForm");
+
+//attach event listener to the form
+form.addEventListener("submit", preventRefreshing, true);
+
+//add teacher and close the modal
+let clickedAddButton = () => {
+  addTeacher();
   //close the modal after add button is clicked
   modal.style.display = "none";
 };
-
-
-/* delete object from the group array and then delete it from the teachers' array*/
-
-let removeTeacher = (getClickedElementID) => {
-  let teacher = teachers.find((teacher) => teacher.id === getClickedElementID);
-  for (let i = 0; i < groups.length; i++) {
-    if (groups[i].teacherID === teacher.ID) {
-      groups[i].teacherID = null;
-    } else {
-      continue;
-    }
-  }
-  teachers.splice(teachers.indexOf(teacher), 1);
-};
-
