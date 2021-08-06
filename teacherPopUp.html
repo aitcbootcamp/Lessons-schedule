@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <!-- Trigger/Open The TeacherModal -->
+    <!-- For Triggering/Opening The TeacherModal -->
     <button id="myBtn">Open Teacher Modal</button>
 
-    <!-- The Modal -->
+    <!-- The Modal Div-->
     <div id="myModal" class="modal">
 
         <!-- Modal content -->
@@ -20,16 +20,16 @@
             <span class="close">&times;</span>
             <p id="modalHeading">Add Teacher</p>
             <form id="modalForm">
-            <label for="">Name</label><input type="text" class="inputs" id="name"  ><br>
-            <label for="">Surname</label><input type="text" class="inputs" id="surname"  ><br>
-            <label for="">Subject</label><input type="text" class="inputs" id="subject"  >
-            <button type="submit" id="modalButton" onclick="addTeacher()" onsubmit="addButtonClicked()">Add</button>
+            <label for="">Name</label><input type="text" class="inputs" id="name" onfocus=this.value='' ><br>
+            <label for="">Surname</label><input type="text" class="inputs" id="surname"  onfocus=this.value=''><br>
+            <label for="">Subject</label><input type="text" class="inputs" id="subject"  onfocus=this.value=''>
+            <button type="submit" id="modalButton"  onclick="clickedAddButton()" onsubmit="clickedAddButton()">Add</button>
             </form>
         </div>
 
     </div>
+    
     <script src="teacherPopUp.js"></script>
-    <script src="index.js"></script>
 </body>
 
 </html>
