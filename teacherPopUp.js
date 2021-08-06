@@ -67,43 +67,22 @@ let addTeacher = () => {
   console.log(teachers[1]);
 };
 
-//getting Id of clicked Element
-const getClickedElementId = (event) => {
-  return event.target.id;
-};
-window.addEventListener("click", getClickedElementId);
-
-/* delete object from the group array and then delete it from the teachers' array*/
-
-let removeTeacher = (getClickedElementID) => {
-  let teacher = teachers.find((teacher) => teacher.id === getClickedElementID);
-  for (let i = 0; i < groups.length; i++) {
-    if (groups[i].teacherID === teacher.ID) {
-      groups[i].teacherID = null;
-    } else {
-      continue;
-    }
-  }
-  teachers.splice(teachers.indexOf(teacher), 1);
-};
-
 /* when clicking on the add button */
 
 let addButtonClicked = () => {
   //prevent page from refreshing
   let preventRefreshing = (event) => {
     event.preventDefault();
-    // getting the form
-    let form = document.getElementById("modalForm");
-
-    // attach event listener to the form
-    form.addEventListener("submit", preventRefreshing, true);
-
-    //clear input values after submitting
-    nameInputValue = " ";
-    surnameInputValue = " ";
-    subjectInputValue = " ";
-    //close the modal after add button is clicked
-    modal.style.display = "none";
+    window.history.back();
   };
+  //getting the form
+  let form = document.getElementById("modalForm");
+  //attach event listener to the form
+  form.addEventListener("submit", preventRefreshing, true);
+  //clear input values after submitting
+  nameInputValue = " ";
+  surnameInputValue = " ";
+  subjectInputValue = " ";
+  //close the modal after add button is clicked
+  modal.style.display = "none";
 };
