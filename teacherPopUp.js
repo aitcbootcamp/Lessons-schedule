@@ -1,11 +1,11 @@
 // Get the modal
-var modal = document.getElementById("myModal");
+let modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+let btn = document.getElementById("myBtn");
 
 //Get the button Which adds Teacher
-var modalButton = document.getElementById("modalButton");
+let modalAddButton = document.getElementById("modalButton");
 
 //getting input elements
 
@@ -37,9 +37,6 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
-
-//getting add button
-let button = document.getElementById("modalButton");
 
 //create an empty teachers' array
 let teachers = [];
@@ -86,7 +83,7 @@ let removeTeacher = (getClickedElementID) => {
       continue;
     }
   }
-  teachers.splice(indexOf(teacher), 1);
+  teachers.splice(teachers.indexOf(teacher), 1);
 };
 
 /* when clicking on the add button */
