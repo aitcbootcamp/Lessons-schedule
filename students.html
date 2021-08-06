@@ -1,50 +1,85 @@
 <!DOCTYPE html>
 <html lang="ka">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="addst.css">
+
 </head>
+
 <body>
-    <nav id="mynav" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.html">Management</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="students.html">მოსწავლეები</a>
-            <a class="nav-item nav-link" href="teachers.html">მასწავლებლები</a>
-          </div>
-        </div>
-      </nav>
-      <div class="add-student">
-        <button class="btn-2">
-            AddStudent
-        </button>
+  <nav id="mynav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">Management</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="students.html">მოსწავლეები</a>
+        <a class="nav-item nav-link" href="teachers.html">მასწავლებლები</a>
       </div>
-      <div class="students-table">
-        <div class="row">
-          <div class="col-md-3 students-table-cols students-table-header">
-            სახელი,გვარი
-          </div>
-          <div class="col-md-4 students-table-cols students-table-header">
-            სასურველი საგნები
-          </div>
-          <div class="col-md-2 students-table-cols students-table-header">
-            სწავლების ტიპი
-          </div>
-          <div class="col-md-2 students-table-cols students-table-header">
-            დამატებითი ინფორმაცია
-          </div>
-          <div class="col-md-1 students-table-cols students-table-header">
-            წაშლა
-          </div>
+    </div>
+  </nav>
+  <form action="" class="form" autocomplete="off">
+    <div id="myModal" class="popup">
+
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalHeading">Add Student</p>
+        <label for="name">სახელი, გვარი</label><input type="text" class="inputs" id="inputName"><br>
+        <label for="subjects">საგნები:</label>
+        <div class="sagnebi">
+          <label for="ქართული">ქართული</label> <input class="subjects " id="ქართული" type="checkbox">
+          <label for="მათემატიკა">მათემატიკა</label> <input class="subjects" id="მათემატიკა" type="checkbox">
+          <label for="უნარები">უნარები</label> <input class="subjects" id="უნარები" type="checkbox">
+          <label for="უნარები">უნარები სამაგისტრო</label> <input class="subjects" id="უნარები" type="checkbox">
+          <label for="ინგლისური">ინგლისური</label> <input class="subjects" id="ინგლისური" type="checkbox">
+          <label for="ფიზიკა">ფიზიკა</label> <input class="subjects" id="ფიზიკა" type="checkbox">
+          <label for="ქიმია">ქიმია</label> <input class="subjects" id="ქიმია" type="checkbox">
+          <label for="ბიოლოგია">ბიოლოგია</label> <input class="subjects" id="ბიოლოგია" type="checkbox">
+          <label for="ისტორია">ისტორია</label> <input class="subjects" id="ისტორია" type="checkbox">
+          <label for="გეოგრაფია">გეოგრაფია</label> <input class="subjects" id="გეოგრაფია" type="checkbox">
+        </div>
+
+        <button type="submit" id="popUpbtn">Add</button>
+      </div>
+    </div>
+  </form>
+  <div class="add-Button"></div>
+  <div class="add-student">
+    <button class="btn-2">
+      Add Student
+    </button>
+
+    </>
+
+    <div class="students-table">
+      <div class="row">
+        <div class="col-md-3 students-table-cols students-table-header">
+          სახელი,გვარი
+        </div>
+        <div class="col-md-4 students-table-cols students-table-header">
+          სასურველი საგნები
+        </div>
+        <div class="col-md-2 students-table-cols students-table-header">
+          სწავლების ტიპი
+        </div>
+        <div class="col-md-2 students-table-cols students-table-header">
+          დამატებითი ინფორმაცია
+        </div>
+        <div class="col-md-1 students-table-cols students-table-header">
+          წაშლა
         </div>
       </div>
+    </div>
+    <script src="main.js"></script>
 </body>
+
 </html>
