@@ -64,6 +64,7 @@ let addTeacher = () => {
   let newTeacher = new Teacher(fullName, id, subjectInputValue);
   // pusshing new teacher object to the teachers's array
   teachers.push(newTeacher);
+  console.log(teachers[1]);
 };
 
 //getting Id of clicked Element
@@ -88,22 +89,21 @@ let removeTeacher = (getClickedElementID) => {
 
 /* when clicking on the add button */
 
-//prevent page from refreshing
 let addButtonClicked = () => {
+  //prevent page from refreshing
   let preventRefreshing = (event) => {
     event.preventDefault();
+    // getting the form
+    let form = document.getElementById("modalForm");
+
+    // attach event listener to the form
+    form.addEventListener("submit", preventRefreshing, true);
+
+    //clear input values after submitting
+    nameInputValue = " ";
+    surnameInputValue = " ";
+    subjectInputValue = " ";
+    //close the modal after add button is clicked
+    modal.style.display = "none";
   };
-
-  // getting the form
-  let form = document.getElementById("modalForm");
-
-  // attach event listener to the form
-  form.addEventListener("submit", preventRefreshing, true);
-
-  //clear input values after submitting
-  nameInputValue = " ";
-  surnameInputValue = " ";
-  subjectInputValue = " ";
-  //close the modal after add button is clicked
-  modal.style.display = "none";
 };
