@@ -159,9 +159,18 @@ let group3 = new Group(
   "სამშაბათი, ხუთშაბათი, 11:20",
 );
 group3.subject = 'უნარები';
-groups.push(group3);
 group3.teacherID = '2';
+groups.push(group3);
 
+
+let group4 = new Group(
+  "group4",
+  "203",
+  "სამშაბათი, ხუთშაბათი, 11:20",
+);
+group4.subject = 'მათემატიკა';
+// group4.teacherID = '2';
+groups.push(group4);
 
 nathaniel.groupIDs.push('group1');
 nathaniel.groupIDs.push('group2');
@@ -177,139 +186,114 @@ alexander.groupIDs.push('group1');
 tornike.groupIDs.push('group1');
 
 
-//ჩვენი ჯავასკრიპტის პოპაპი
-popWrap = makePopWrap();
-
-const studentButtons = document.querySelectorAll('.btn-popup');
-const teacherButtons = document.querySelectorAll('.popup-teacher');
-
-
-//student button-ებზე poppup-ის დამატება
-studentButtons.forEach(button => {
-  button.parentElement.appendChild(popWrap);
-})
-
-//teacher button-ებზე poppup-ის დამატება
-teacherButtons.forEach(button => {
-  button.parentElement.appendChild(popWrap);
-});
-
-const popup = document.querySelector('.popup-wrapper');
-const close = document.querySelector('.popup-close');
-
-//pop-up-ის გათიშვის ღილაკისთვის
-close.addEventListener('click', ()=>{
-  popup.style.display = 'none';
-  location.reload();
-})
-
-
-//addTeacher-თვის buttonclick-ი
-teacherButtons.forEach(button =>{
-  button.addEventListener('click', () => {
-    //ეძებს გრუპს, რომელიც ავირჩიეთ
-    let group = groups.find(e => e.id == button.parentElement.parentElement.parentNode.id);
-    popup.style.display = 'block';
-    popup.style.zIndex = '1';
-    //ქმნის მასივს მასწავლებლების ვისაც შეუძლია ამ საგნის სწავლება
-    let teachSubj = teachers.filter(e => e.subjects.includes(group.subject) && !e.getDateTimes(groups).includes(group.dateTime));
-    //ქმნის ul-ს ამ მასწავლებლების მასივის ეკრანზე გამოსატანად
-    createUL(teachSubj, 'addTeacherBtn');
-    //popup-ის add-ით მასწ-ის ჩამატება
-    //მასწავლებელს თუ არ სცალია, არ მოხვდება ფილტრში, ამიტომ მაგას აღარ ვამოწმებ
-    const addTeacherBtns = document.querySelectorAll('.addTeacherBtn');
-    addTeacherBtns.forEach(addTeacherBtn =>{
-      addTeacherBtn.addEventListener('click', () => {
-        let teacher = teachers.find(e=>e.id == addTeacherBtn.id);
-        addTeacherToGroup(group, teacher)
-        //ეს შეიძლება აღარ დაჭირდეს
-        addTeacherBtn.parentElement.parentElement.remove();
-//        location.reload();
-      })
-    })
-  })
-})
-
-studentButtons.forEach(button => {
-   button.addEventListener('click', () =>{
-     //ეძებს გრუპს, რომელიც ავირჩიეთ
-     let group = groups.find(e => e.id == button.parentElement.parentElement.parentNode.id);
-     popup.style.display = 'block';
-     popup.style.zIndex = '1';
-     //ქმნის მასივს სტუდენტების, ვისაც არჩეული აქვს ჯგუფის საგანი, ჯერ არაა ჯგუფში დამატებული და ამ დროს სხვა საგანი არ აქვს
-     let studSubj = students.filter(e => e.subjects.includes(group.subject) && !group.memberIDs.includes(e.id) && e.isFree(group.dateTime, groups));
-     //ქმნის ul-ს ამ სტუდენტების მასივის ეკრანზე გამოსატანად
-     createUL(studSubj, 'addStudBtn');
-     // თითოეული სტუდენტის add-თვის pop-up-ში
-     const addStudBtns = document.querySelectorAll('.addStudBtn');
-     addStudBtns.forEach(addStudBtn =>{
-       addStudBtn.addEventListener('click', () => {
-         let student = students.find(e=>e.id == addStudBtn.id);
-         addStudentToGroup(group, student);
-          //შლის იმ li-ს სადაც დამატებული სტუდენტის მონაცემებია
-          //თუმცა, თუ ლოკალსტორეჯიდან წამოიღო მონაცემები, შეიძლება აღარც დაჭირდეს, not sure
-          addStudBtn.parentElement.parentElement.remove();
-         location.reload();
-       })
-     })
-   })
-})
-
-
-
-//dom-ში პოულობს ჯგუფებს
+//index.html გვერდზე ინფორმაციის გამოტანა
 const domGroups = Array.from(document.querySelectorAll('.table-2-cols')).concat(Array.from(document.querySelectorAll('.table-1-cols')));
-//თითოეული ჯგუფისთვის გამოაქვს მისი წევრების სახელები
   groups.forEach(group =>{
     //დომ-ის ჯგუფს აკავშირებს მასივთან
     let g = domGroups.find(e=>e.id == group.id);
-    //ჯგუფების მასწებს ეძებს:
+    //ფილტრავს ჯგუფის საგნის მასწავლებლების მასივს
     let subjTeachers = teachers.filter(e => e.id == group.teacherID);
-    subjTeachers.forEach(subjTeacher => {
-    li = createLi('teachList', subjTeacher, 'teachDelBtn');
-//    g.children[0].children[0].children[0].remove();
-    //მასწ-ის ინფორმაციის შემცველ li-ს სვამს სიაში
-    g.children[0].insertBefore(li, g.children[0].children[0]);
-    })
-
-    //ჯგუფის სტუდენტებს ფილტრავს
+    //ფილტრავს ჯგუფების სტუდენტებს
     let groupStudents = students.filter(e => e.groupIDs.includes(group.id));
+    //ქმნის ul-ს ჯგუფის მონაცემების გამოსატანად ეკრანზე
+    ul = document.createElement('ul');
+    //თუ დამატებულია მასწ-ი, გამოაქვს მასწ-ის მონაცემები, თუ არა, addTeacher button-ი
+    if(group.teacherID == ''){
+      li = liForButton('AddTeacher', 'btn-1 popup-teacher');
+    } else {
+    //ჯგუფების მასწებს ეძებს:
+    subjTeachers.forEach(subjTeacher => {
+      li = createLi('teachList', subjTeacher, 'teachDelBtn');
+    //მასწ-ის ინფორმაციის შემცველ li-ს სვამს სიაში
+    })
+    }
+    //ul-ს ამატებს teacher-ის მონაცემს
+    ul.append(li)
+    ;
+    //ჯგუფის თითოეული სტუდენტისთვის
     //ამატებს li-ებს
     groupStudents.forEach(stud => {
     li = createLi('studList', stud, 'studDelBtn');
-    g.children[0].insertBefore(li, g.children[0].children[2]);
+    ul.append(li);
     })
-    // ეს addbutton-ის გაქრობაა, ჩემი უმთავრესი გამოწვევა, რომელსაც მოგვიანებით მივხედავ
-    // if(groupStudents.length >= 7){
-    //   g.children[0].children[9].children[0].remove();
-    // }
-    //teacher delete button-ების click event-ი
-    const teachDelBtns = document.querySelectorAll('.teachDelBtn');
-    teachDelBtns.forEach(teachDelBtn =>{
-      teachDelBtn.addEventListener('click', () => {
-        let teacher = teachers.find(e=>e.id == teachDelBtn.name);
-        deleteTeacherFromGroup(group, teacher)
-        //შლის იმ li-ს სადაც დამატებული სტუდენტის მონაცემებია
-        //თუმცა, თუ ლოკალსტორეჯიდან წამოიღო მონაცემები, შეიძლება აღარც დაჭირდეს, not sure
-        teachDelBtn.parentElement.parentElement.remove();
-  //      location.reload();
-      })
-    })
+    //თუ ჯგუფი შევსებული არაა, ამატებს addStudent button-ს
+    if(groupStudents.length < 7){
+      li = liForButton('AddStudent', "btn-1 btn-popup");
+      ul.append(li);
+    }
+    // dom-ის ჯგუფს ამატებს შექმნილ ul-ს, სადაც ყვეელას მონაცემი გვაქვს ჯგუფში
+    g.append(ul);
+
+    //teacher delete button-ების ივენთი
+    addDelBtnEvents(teachers, '.teachDelBtn', group);
 
     //student-ის delBtn
-    const studDelBtns = document.querySelectorAll('.studDelBtn');
-    studDelBtns.forEach(studDelBtn =>{
-      studDelBtn.addEventListener('click', () => {
-         let student = students.find(e=>e.id == studDelBtn.name);
-         console.log(student);
-         deleteStudentFromGroup(group, student);
-         //შლის იმ li-ს სადაც დამატებული სტუდენტის მონაცემებია
-         //თუმცა, თუ ლოკალსტორეჯიდან წამოიღო მონაცემები, შეიძლება აღარც დაჭირდეს, not sure
-         studDelBtn.parentElement.parentElement.remove();
-         location.reload();
-      })
+    addDelBtnEvents(students, '.studDelBtn', group);
+  })
+
+  //ჩვენი ჯავასკრიპტის პოპაპი
+  popWrap = makePopWrap();
+
+  //addStudent button-ების მასივი
+  const studentButtons = document.querySelectorAll('.btn-popup');
+  //addTeacher button-ების მასივი
+  const teacherButtons = document.querySelectorAll('.popup-teacher');
+
+
+  //student button-ებზე poppup-ის დამატება
+  studentButtons.forEach(button => {
+    button.parentElement.appendChild(popWrap);
+  })
+
+  //teacher button-ებზე poppup-ის დამატება
+  teacherButtons.forEach(button => {
+    button.parentElement.appendChild(popWrap);
+  });
+
+  const popup = document.querySelector('.popup-wrapper');
+  const close = document.querySelector('.popup-close');
+
+  //pop-up-ის გათიშვის ღილაკისთვის
+  close.addEventListener('click', ()=>{
+    popup.style.display = 'none';
+    location.reload();
+  })
+
+
+  //addTeacher-თვის buttonclick-ი
+  teacherButtons.forEach(button =>{
+    button.addEventListener('click', () => {
+      //ეძებს გრუპს, რომელიც ავირჩიეთ
+      let group = groups.find(e => e.id == button.parentElement.parentElement.parentNode.id);
+      popup.style.display = 'block';
+      popup.style.zIndex = '1';
+      //ქმნის მასივს მასწავლებლების ვისაც შეუძლია ამ საგნის სწავლება და დაკავებული არაა მოცემულ დროს
+      let teachSubj = teachers.filter(e => e.subjects.includes(group.subject) && !e.getDateTimes(groups).includes(group.dateTime));
+      //ქმნის ul-ს ამ მასწავლებლების მასივის ეკრანზე გამოსატანად
+      createUL(teachSubj, 'addTeacherBtn');
+      //popup-ის add button-ით მასწ-ის ჩამატება
+
+      addAddBtnEvents('.addTeacherBtn', teachers, group);
     })
   })
+
+
+  //addStudent-თვის buttonclick
+  studentButtons.forEach(button => {
+     button.addEventListener('click', () =>{
+       //ეძებს გრუპს, რომელიც ავირჩიეთ
+       let group = groups.find(e => e.id == button.parentElement.parentElement.parentNode.id);
+       popup.style.display = 'block';
+       popup.style.zIndex = '1';
+       //ქმნის მასივს სტუდენტების, ვისაც არჩეული აქვს ჯგუფის საგანი, ჯერ არაა ჯგუფში დამატებული და ამ დროს სხვა საგანი არ აქვს
+       let studSubj = students.filter(e => e.subjects.includes(group.subject) && !group.memberIDs.includes(e.id) && e.isFree(group.dateTime, groups));
+       //ქმნის ul-ს ამ სტუდენტების მასივის ეკრანზე გამოსატანად
+       createUL(studSubj, 'addStudBtn');
+       // თითოეული სტუდენტის add-თვის pop-up-ში
+       addAddBtnEvents('.addStudBtn', students, group);
+     })
+  })
+
 
 function createLi(classAttr, person, delBtn){
   const li = document.createElement('li');
@@ -398,6 +382,41 @@ function makePopWrap(){
   return popWrap;
 }
 
+function liForButton(text, btnClass){
+  const li = document.createElement('li');
+  const tag = document.createElement("button");
+  tag.setAttribute('class', btnClass);
+  tag.innerText = text;
+  li.appendChild(tag);
+  return li;
+}
+
+function addDelBtnEvents(persons, className, group){
+  const personDelBtns = document.querySelectorAll(className);
+  personDelBtns.forEach(personDelBtn =>{
+    personDelBtn.addEventListener('click', () => {
+      let person = persons.find(e=>e.id == personDelBtn.name);
+      deleteTeacherFromGroup(group, person)
+      //შლის იმ li-ს სადაც დამატებული სტუდენტის მონაცემებია
+      //თუმცა, თუ ლოკალსტორეჯიდან წამოიღო მონაცემები, შეიძლება აღარც დაჭირდეს, not sure
+      personDelBtn.parentElement.parentElement.remove();
+//      location.reload();
+    })
+  })
+}
+
+function addAddBtnEvents(btnClass, persons, group){
+  const addPersonBtns = document.querySelectorAll(btnClass);
+  addPersonBtns.forEach(addPersonBtn =>{
+    addPersonBtn.addEventListener('click', () => {
+      let person = persons.find(e=>e.id == addPersonBtn.id);
+      addTeacherToGroup(group, person);
+      //ეს შეიძლება აღარ დაჭირდეს
+      addPersonBtn.parentElement.parentElement.remove();
+//        location.reload();
+    })
+  })
+}
 
 //ნიკას localStorage-ი
 
