@@ -1,5 +1,14 @@
 /* The Modal (background) */
-.popup {
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 10%;
+    top: 10%;
+    width: 70%;
+    height: 70%; 
+  }
+  .popup {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -9,9 +18,9 @@
     height: 600px;
     overflow: hidden; /* Enable scroll if needed */
   }
-  
   /* Modal Content/Box */
   .modal-content {
+    font-family: cursive;
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 2em;
@@ -21,15 +30,14 @@
   #modalHeading {
     color: green;
   }
-  
+
   /* The Close Button */
   .close {
-    color: #aaa;
+    color: red;
     float: right;
     font-size: 28px;
     font-weight: bold;
   }
-  
   .close:hover,
   .close:focus {
     color: rgb(69, 134, 60);
@@ -43,23 +51,41 @@
     margin-top: 1em;
   }
   #inputName {
-    margin-left: 0px;
+    margin-left: 4em;
   }
-
-  
+  #inputSurname {
+    margin-left: 2.3em;
+  }
   input {
     outline: none;
   }
-  
   #modalButton {
     margin-top: 1.2em;
     margin-left: 15.5em;
     padding-left: 1.5em;
     padding-right: 1.5em;
   }
-  .sagnebi{
+.ganrigi{
+    list-style: none;
+}  
+.sagnebi{
     display:flex;
     flex-wrap: wrap;
     gap:10px;
   }
-  
+
+
+
+.animation{
+    animation: animate 1s;
+}
+
+@keyframes animate{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        margin-left: -200px;
+        opacity: 0;
+    }
+}
