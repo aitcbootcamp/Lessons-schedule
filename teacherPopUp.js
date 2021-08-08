@@ -1,17 +1,11 @@
+/*ეს არის კოდი :D*/
+//კოდი დაწყებულია და რომ დამთავრდება, დავწერ
+
 // Get the modal
 let modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
 let btn = document.getElementById("myBtn");
-
-//Get the button Which adds Teacher
-let modalAddButton = document.getElementById("modalButton");
-
-//getting input elements
-
-let nameField = document.getElementById("name");
-let surnameField = document.getElementById("surname");
-let subjectsField = document.getElementById("subject");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
@@ -29,13 +23,6 @@ btn.onclick = function () {
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
   modal.style.display = "none";
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
 };
 
 //create an empty teachers' array
@@ -57,47 +44,53 @@ let addTeacher = () => {
   let nameInputValue = document.getElementById("name").value;
   let surnameInputValue = document.getElementById("surname").value;
   let fullName = nameInputValue + " " + surnameInputValue;
-  let subjectInputValue = document.getElementById("subject").value;
   let id = Math.round(new Date().getTime() + Math.random() * 100);
 
-  //create teacher object
-  let newTeacher = new Teacher(fullName, id, subjectInputValue);
+  //get checkbox values
+  var checkedItemsArray = [];
+  var checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
 
-  // pusshing new teacher object to the teachers's array
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkedItemsArray.push(checkboxes[i].value);
+  }
+
+  //create new teacher object
+
+  let newTeacher = new Teacher(fullName, id, checkedItemsArray);
+
+  // pushing new teacher object to the teachers's array
   teachers.push(newTeacher);
 
-  /*removing teachers*/
-  //   let removeTeacher = (getClickedElementID) => {
-  //     let teacher = teachers.find(
-  //       (teacher) => teacher.id === getClickedElementID
-  //     );
-  //     for (let i = 0; i < groups.length; i++) {
-  //       if (groups[i].newTeacherID === newTeacher.ID) {
-  //         groups[i].newTeacherID = null;
-  //       } else {
-  //         continue;
-  //       }
-  //     }
-  //   };
-  //   teachers.splice(teachers.indexOf(newTeacher), 1);
-  //   removeTeacher();
-};
-
-/* when clicking on the add button */
-
-let preventRefreshing = (event) => {
-  event.preventDefault();
-};
-
-//getting the form
-let form = document.getElementById("modalForm");
-
-//attach event listener to the form
-form.addEventListener("submit", preventRefreshing, true);
-
-//add teacher and close the modal
-let clickedAddButton = () => {
-  addTeacher();
-  //close the modal after add button is clicked
+  //close modal after submitting
   modal.style.display = "none";
 };
+
+/*removing teachers*/
+//   let removeTeacher = (getClickedElementID) => {
+//     let teacher = teachers.find(
+//       (teacher) => teacher.id === getClickedElementID
+//     );
+//     for (let i = 0; i < groups.length; i++) {
+//       if (groups[i].newTeacherID === newTeacher.ID) {
+//         groups[i].newTeacherID = null;
+//       } else {
+//         continue;
+//       }
+//     }
+//   };
+//   teachers.splice(teachers.indexOf(newTeacher), 1);
+//   removeTeacher();
+
+/* check if there is any missing checkbox and depending on it, add teacher on the teacher's array*/
+function handleData() {
+  var form_data = new FormData(document.querySelector("form"));
+  if (!form_data.has("subjects[]")) {
+    document.getElementById("chk_option_error").style.visibility = "visible";
+  } else {
+    document.getElementById("chk_option_error").style.visibility = "hidden";
+    addTeacher();
+  }
+  return false;
+}
+
+/*კოდი დასრულდა*/
