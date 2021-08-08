@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Modal</title>
-    <link rel="stylesheet" href="teacherPopUp.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+	<title>Document</title>
 </head>
-
 <body>
+    
     <!-- For Triggering/Opening The TeacherModal -->
     <button id="myBtn">Open Teacher Modal</button>
-
+    
     <!-- The Modal Div-->
     <div id="myModal" class="modal">
-
+    
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
             <p id="modalHeading">Add Teacher</p>
-            <form id="modalForm">
-            <label for="">Name</label><input type="text" class="inputs" id="name" onfocus=this.value='' ><br>
-            <label for="">Surname</label><input type="text" class="inputs" id="surname"  onfocus=this.value=''><br>
-            <label for="">Subject</label><input type="text" class="inputs" id="subject"  onfocus=this.value=''>
-            <button type="submit" id="modalButton"  onclick="clickedAddButton()" onsubmit="clickedAddButton()">Add</button>
+            <form onsubmit="return handleData()">
+                <label for="">Name</label><input type="text" class="inputs" id="name" onfocus=this.value=''><br>
+                <label for="">Surname</label><input type="text" class="inputs" id="surname" onfocus=this.value=''><br>
+                <div style="visibility:hidden; color:red; " id="chk_option_error">
+                    Please select at least one option.
+                </div>
+                <div>
+                    <div id="checkboxHeading">საგნები</div>
+                    <input type="checkbox" name="subjects[]" id="subject1" class="checkboxes" value="ქართული" > <label
+                        for="subject1">ქართული</label>
+                <div>
+                    <input type="checkbox" name="subjects[]" id="subject2" class="checkboxes" value="უნარები"> <label for="subject2">უნარები</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="subjects[]" id="subject3" class="checkboxes" value="უნარები აბიტურიენტებისთვის" > <label
+                        for="subject3">უნარები აბიტურიენტებისთვის</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="subjects[]" id="subject4" class="checkboxes" value="გეოგრაფია"> <label
+                        for="subject4">გეოგრაფია</label>
+                </div> 
+                <div>
+                    <input type="submit" name="submit" value="Submit" />
+                </div>
+                </div> 
             </form>
         </div>
 
-    </div>
-    
-    <script src="teacherPopUp.js"></script>
+    <script src="index.js"></script>
 </body>
-
 </html>
+
