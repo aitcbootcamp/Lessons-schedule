@@ -5,11 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teachers</title>
+    <script src="teachers.js" defer></script>
+    <script src="script.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="addst.css">
 </head>
 <body>
+  <div class="teacher-info">
+    <span class="close" onclick="downInfo(this)">&times;</span>
+    <p></p>
+    <p></p>
+    <p>განრიგი:</p>
+    <ul class="ganrigi"></ul>
+  </div>
     <nav id="mynav" class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">Management</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +33,7 @@
         </div>
       </nav>
       <div class="add-teacher">
-        <button class="btn-2">
+        <button class="btn-2"onclick="createTeacher()">
             AddTeacher
         </button>
       </div>
@@ -43,5 +53,37 @@
           </div>
         </div>
       </div>
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalHeading">Add Teacher</p>
+            <form onsubmit="return handleData()">
+                <label for="">Name</label><input type="text" class="inputs" id="name" onfocus=this.value=''><br>
+                <label for="">Surname</label><input type="text" class="inputs" id="surname" onfocus=this.value=''><br>
+                <div style="visibility:hidden; color:red; " id="chk_option_error">
+                    Please select at least one option.
+                </div>
+                <div>
+                    <div id="checkboxHeading">საგნები</div>
+                    <input type="checkbox" name="subjects[]" id="subject1" class="checkboxes" value="ქართული" > <label
+                        for="subject1">ქართული</label>
+                <div>
+                    <input type="checkbox" name="subjects[]" id="subject2" class="checkboxes" value="უნარები"> <label for="subject2">უნარები</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="subjects[]" id="subject3" class="checkboxes" value="უნარები აბიტურიენტებისთვის" > <label
+                        for="subject3">უნარები აბიტურიენტებისთვის</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="subjects[]" id="subject4" class="checkboxes" value="გეოგრაფია"> <label
+                        for="subject4">გეოგრაფია</label>
+                </div> 
+                <div>
+                    <input type="submit" name="submit" value="Submit" />
+                </div>
+                </div> 
+            </form>
+        </div>
+        </div>
 </body>
 </html>
