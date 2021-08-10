@@ -1,19 +1,14 @@
 /* The Modal (background) */
-/*styling main div */
-#teacherModal {
-  font-family: cursive;
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 2em;
-  top: 5em;
-  height: 20%;
-  width: 50%;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: #fefefe;
-  padding: 2em;
-  border: 0.2em solid rgba(29, 68, 28, 0.562);
-}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 10%;
+    top: 10%;
+    width: 70%;
+    max-height: 70%; 
+    overflow: auto;
+  }
   .popup {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -24,35 +19,36 @@
     height: 600px;
     overflow: hidden; /* Enable scroll if needed */
   }
+  /* Modal Content/Box */
 
- /*styling heading of the main div */
-#modalHeading {
-  color: green;
-}
+  .modal-content {
+    font-family: cursive;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 2em;
+    border: 0.2em solid rgba(29, 68, 28, 0.562);
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  #modalHeading {
+    color: green;
+  }
+  #modalHeading-2 {
+    color: green;
+  }
 
-/* The Close X Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: rgb(69, 134, 60);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/*content*/
-#Info {
-  width: 18.2em;
-  padding: 1em;
-  color: rgb(255, 255, 255);
-  background-color: rgba(82, 121, 77, 0.747);
-  border-radius: 1em;
-}
+  /* The Close Button */
+  .close {
+    color: red;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: rgb(69, 134, 60);
+    text-decoration: none;
+    cursor: pointer;
+  }
   
   /* input fields*/
   .inputs {
@@ -87,6 +83,33 @@
 
 .animation{
     animation: animate 1s;
+}
+
+#name {
+  margin-left: 3.9em;
+}
+#surname {
+  margin-left: 2.2em;
+}
+#subject {
+  margin-left: 2.6em;
+}
+
+.teacher-info{
+  position: absolute;
+  display: none;
+  top: 0;
+  left:10%;
+  width: 700px;
+  z-index: 2;
+  max-height: 300px; 
+  border-radius: 10px;
+  overflow: auto;
+  font-family: cursive;
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 2em;
+  border: 0.2em solid rgba(29, 68, 28, 0.562);
 }
 
 @keyframes animate{
