@@ -1,3 +1,4 @@
+
 class Person {
   constructor(name, id, subjects=[]){
     this.name = name;
@@ -286,93 +287,103 @@ let popup = {};
 
 let close = {};
 
-makeDom();
+let content = {};
 
-function makeDom(){
-
-  const domGroups = Array.from(document.querySelectorAll('.table-1-cols')).concat(Array.from(document.querySelectorAll('.table-2-cols')));
+const domGroups = Array.from(document.querySelectorAll('.table-1-cols')).concat(Array.from(document.querySelectorAll('.table-2-cols')));
 //    domGroups.forEach(group => console.log(group))
-    groups.forEach(group =>{
-      //დომ-ის ჯგუფს აკავშირებს მასივთან
-      let g = domGroups.find(e=>e.id == group.id);
-      g.removeChild(g.childNodes[0]);
-      //ფილტრავს ჯგუფის საგნის მასწავლებლების მასივს
-      //იდეაში, ელემენტებს შლის რო მეორე გამოძახებისას იპოვოს მარა მიფუჭებს რაღაცებს, სო, ნოთ შუა
-      let teacher = teachers.find(e => e.id == group.teacherID);
-//      g.removeChild(g.childNodes[0]);
-      //ფილტრავს ჯგუფების სტუდენტებს
-      let groupStudents = students.filter(e => e.groupIDs.includes(group.id));
-      //ქმნის ul-ს ჯგუფის მონაცემების გამოსატანად ეკრანზე
-      let ul = document.createElement('ul');
-      //ul-ს ამატებს teacher-ის მონაცემს
-      if(group.subject != ''){
-        li = createLiForSubject('subjList', group, 'subjDelBtn');
-        //subject delete button-ების ივენთი
-        ul.append(li);
-      } else {
-        li = liForAddSubjectButton(group);
-        ul.append(li);
-      }
-      //თუ დამატებულია მასწ-ი, გამოაქვს მასწ-ის მონაცემები, თუ არა, addTeacher button-ი
-      if(group.teacherID != ''){
-        li = createLiForTeacher('teachList', teacher, 'teachDelBtn', group);
-           //მასწ-ის ინფორმაციის შემცველ li-ს სვამს სიაში
-        ul.append(li);
-      } else {
-        li = liForAddTeacherButton(group);
-        ul.append(li);
-      }
+  groups.forEach(group => {
+    makeGroupDom(group);
+  })
 
-      //ჯგუფის თითოეული სტუდენტისთვის
-      //ამატებს li-ებს
-      groupStudents.forEach(stud => {
-      li = createLiForStudent('studList', stud, 'studDelBtn', group);
-      //student-ის delBtn
+
+function makeGroupDom(group){
+
+    console.log(group.id);
+    //დომ-ის ჯგუფს აკავშირებს მასივთან
+    let g = domGroups.find(e=>e.id == group.id);
+    try{
+      content.removeChild(content.childNodes[0]);
+    } catch{
+      console.log('bla');
+    }
+    g.removeChild(g.childNodes[0]);
+    //ფილტრავს ჯგუფის საგნის მასწავლებლების მასივს
+    //იდეაში, ელემენტებს შლის რო მეორე გამოძახებისას იპოვოს მარა მიფუჭებს რაღაცებს, სო, ნოთ შუა
+    let teacher = teachers.find(e => e.id == group.teacherID);
+//      g.removeChild(g.childNodes[0]);
+    //ფილტრავს ჯგუფების სტუდენტებს
+    let groupStudents = students.filter(e => e.groupIDs.includes(group.id));
+    //ქმნის ul-ს ჯგუფის მონაცემების გამოსატანად ეკრანზე
+    let ul = document.createElement('ul');
+    //ul-ს ამატებს teacher-ის მონაცემს
+    if(group.subject != ''){
+      li = createLiForSubject('subjList', group, 'subjDelBtn');
+      //subject delete button-ების ივენთი
       ul.append(li);
-      })
-      //თუ ჯგუფი შევსებული არაა, ამატებს addStudent button-ს
-      if(groupStudents.length < 7){
-        li = liForAddStudentButton(group);
+    } else {
+      li = liForAddSubjectButton(group);
+      ul.append(li);
+    }
+    //თუ დამატებულია მასწ-ი, გამოაქვს მასწ-ის მონაცემები, თუ არა, addTeacher button-ი
+    if(group.teacherID != ''){
+      li = createLiForTeacher('teachList', teacher, 'teachDelBtn', group);
+         //მასწ-ის ინფორმაციის შემცველ li-ს სვამს სიაში
+      ul.append(li);
+    } else {
+      li = liForAddTeacherButton(group);
+      ul.append(li);
+    }
+
+    //ჯგუფის თითოეული სტუდენტისთვის
+    //ამატებს li-ებს
+    groupStudents.forEach(stud => {
+    li = createLiForStudent('studList', stud, 'studDelBtn', group);
+    //student-ის delBtn
+    ul.append(li);
+    })
+    //თუ ჯგუფი შევსებული არაა, ამატებს addStudent button-ს
+    if(groupStudents.length < 7){
+      li = liForAddStudentButton(group);
 //        li.appendChild(popWrap);
 //        li.appendChild(popup);
-        ul.append(li);
-      }
-      // dom-ის ჯგუფს ამატებს შექმნილ ul-ს, სადაც ყვეელას მონაცემი გვაქვს ჯგუფში
-      g.append(ul);
+      ul.append(li);
+    }
+    // dom-ის ჯგუფს ამატებს შექმნილ ul-ს, სადაც ყვეელას მონაცემი გვაქვს ჯგუფში
+    g.append(ul);
+    popupEvents();
+  }
+
+  function popupEvents(){
+
+    content = {};
+
+    popWrap = makePopWrap();
+
+    studentButtons = document.querySelectorAll('.btn-popup');
+
+    teacherButtons = document.querySelectorAll('.popup-teacher');
+
+    //student button-ებზე poppup-ის დამატება
+    studentButtons.forEach(button => {
+      button.parentElement.appendChild(popWrap);
     })
 
-    popEvents();
-}
+    //teacher button-ებზე poppup-ის დამატება
+    teacherButtons.forEach(button => {
+      button.parentElement.appendChild(popWrap);
+    });
 
+    popup = document.querySelector('.popup-wrapper');
 
-function popEvents(){
+    close = document.querySelector('.popup-close');
 
-  popWrap = makePopWrap();
+    content = document.querySelector('.popup-content');
 
-  studentButtons = document.querySelectorAll('.btn-popup');
-
-  teacherButtons = document.querySelectorAll('.popup-teacher');
-
-  //student button-ებზე poppup-ის დამატება
-  studentButtons.forEach(button => {
-    button.parentElement.appendChild(popWrap);
-  })
-
-  //teacher button-ებზე poppup-ის დამატება
-  teacherButtons.forEach(button => {
-    button.parentElement.appendChild(popWrap);
-  });
-
-  popup = document.querySelector('.popup-wrapper');
-
-  close = document.querySelector('.popup-close');
-
-  close.addEventListener('click', ()=>{
-    popup.style.display = 'none';
-    makeDom();
-//    location.reload();
-  })
-}
+    close.addEventListener('click', ()=>{
+      popup.style.display = 'none';
+  //    location.reload();
+    })
+  }
 
 
 function createLiForSubject(classAttr, group, delBtn){
@@ -388,9 +399,10 @@ function createLiForSubject(classAttr, group, delBtn){
     let msg = confirm('საგნის წაშლა');
       if(msg == true){
         deleteSubjectFromGroup(group);
-        li.remove();
+        delbtn.parentElement.parentElement.remove();
         li = liForAddSubjectButton(group);
-        makeDom();
+        makeGroupDom(group);
+//
       } else {
         console.log('bla');
       }
@@ -416,7 +428,7 @@ function createLiForTeacher(classAttr, teacher, delBtnClass, group){
         deleteTeacherFromGroup(group, teacher);
         delbtn.parentElement.parentElement.remove();
         li = liForAddTeacherButton(group)
-        makeDom();
+        makeGroupDom(group);
       } else {
         console.log('bla');
       }
@@ -441,8 +453,8 @@ function createLiForStudent(classAttr, student, delBtnClass, group){
       if(msg == true){
         deleteStudentFromGroup(group, student);
         delbtn.parentElement.parentElement.remove();
-        li = liForAddStudentButton(group)
-        makeDom();
+        li = liForAddStudentButton(group);
+        makeGroupDom(group);
       } else {
         console.log('bla');
       }
@@ -464,9 +476,8 @@ function createLiForTeacherAdd(teacher, addBtnClass, group){
     addbtn.setAttribute('class', addBtnClass);
     addbtn.addEventListener('click', () => {
       addTeacherToGroup(group, teacher);
+      makeGroupDom(group);
       popup.style.display = 'none';
-      makeDom();
-  //    popEvents();
     })
     tag.innerText = teacher.name;
     tag.appendChild(addbtn);
@@ -485,8 +496,7 @@ function createLiForStudentAdd(student, addBtnClass, group){
     addbtn.setAttribute('class', addBtnClass);
     addbtn.addEventListener('click', () => {
       addStudentToGroup(group, student);
-      makeDom();
-//      popEvents();
+      makeGroupDom(group);
       popup.style.display = 'none';
     })
     tag.innerText = student.name;
@@ -497,8 +507,8 @@ function createLiForStudentAdd(student, addBtnClass, group){
 
 
 function createULForSubject(subjects, addBtnClass, group){
-  const ul = document.createElement('ul');
-  const content = document.querySelector('.popup-content');
+  let ul = document.createElement('ul');
+//  const content = document.querySelector('.popup-content');
   content.append(ul);
   // გამოაქვს პოპაპში გამოიტანს პერსონის მონაცემებს (იმედია)
   for (subject of subjects){
@@ -512,7 +522,7 @@ function createULForSubject(subjects, addBtnClass, group){
     tag.innerText = subject;
     addbtn.addEventListener('click', () => {
       addSubjectToGroup(group, addbtn.name);
-      makeDom();
+      makeGroupDom(group);
       popup.style.display = 'none';
     })
     tag.appendChild(addbtn);
@@ -603,7 +613,6 @@ function liForAddTeacherButton(group){
         let li = createLiForTeacherAdd(teacher, 'addTeacherBtn', group);
         ul.append(li);
       })
-      const content = document.querySelector('.popup-content');
       content.append(ul);
     }
   })
@@ -631,7 +640,6 @@ function liForAddStudentButton(group){
         let li = createLiForStudentAdd(student, 'addStudBtn', group);
         ul.append(li);
       })
-      const content = document.querySelector('.popup-content');
       content.append(ul);
     }
     // თითოეული სტუდენტის add-თვის pop-up-ში
